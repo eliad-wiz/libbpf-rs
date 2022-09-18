@@ -248,6 +248,26 @@ impl<'b> PerfBuffer<'b> {
             unsafe { libbpf_sys::perf_buffer__buffer_fd(self.ptr, buf_idx as libbpf_sys::size_t) };
         util::parse_ret_i32(ret)
     }
+
+    pub fn buffer_buffer(&self, buf_idx: usize) -> Result<&mut [u8]> {
+        let mut buffer_data_ptr: *mut c_void = std::ptr::null_mut();
+        let mut buffer_size: usize = 0;
+        let ret = unsafe {
+            libbpf_sys::perf_buffer__buffer(
+                self.ptr,
+                buf_idx as i32,
+                std::ptr::addr_of_mut!(buffer_data_ptr) as *mut *mut c_void,
+                std::ptr::addr_of_mut!(buffer_size) as *mut libbpf_sys::size_t,
+            )
+        };
+        util::parse_ret(ret)?;
+        unsafe {
+            Ok(std::slice::from_raw_parts_mut(
+                buffer_data_ptr as *mut u8,
+                buffer_size,
+            ))
+        }
+    }
 }
 
 impl<'b> Drop for PerfBuffer<'b> {
