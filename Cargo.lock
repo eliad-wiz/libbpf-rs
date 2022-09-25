@@ -257,7 +257,7 @@ dependencies = [
 [[package]]
 name = "libbpf-sys"
 version = "1.0.0+v1.0.0"
-source = "git+https://github.com/arilou/libbpf-sys?branch=fix_access#7061437364e596a3944512d02726ce286a262b3c"
+source = "git+https://github.com/arilou/libbpf-sys?branch=try_faccessat#317e7f222628bcb13cfbcbba47e24c16bf382156"
 dependencies = [
  "cc",
  "pkg-config",

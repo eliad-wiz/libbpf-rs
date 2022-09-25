@@ -22,7 +22,7 @@ static = ["libbpf-sys/static"]
 [dependencies]
 bitflags = "1.3"
 lazy_static = "1.4"
-libbpf-sys = { git = "https://github.com/arilou/libbpf-sys", branch = "fix_access" }
+libbpf-sys = { git = "https://github.com/arilou/libbpf-sys", branch = "try_faccessat" }
 nix = { version = "0.24", default-features = false, features = ["net", "user"] }
 num_enum = "0.5"
 strum_macros = "0.23"

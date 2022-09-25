@@ -31,7 +31,7 @@ novendor = ["libbpf-sys/novendor"]
 [dependencies]
 anyhow = "1.0"
 cargo_metadata = "0.14"
-libbpf-sys = { git = "https://github.com/arilou/libbpf-sys", branch = "fix_access" }
+libbpf-sys = { git = "https://github.com/arilou/libbpf-sys", branch = "try_faccessat" }
 memmap2 = "0.5"
 num_enum = "0.5"
 regex = "1.6.0"
