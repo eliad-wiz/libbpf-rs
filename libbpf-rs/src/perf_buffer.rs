@@ -277,3 +277,5 @@ impl<'b> Drop for PerfBuffer<'b> {
         }
     }
 }
+
+unsafe impl<'b> Send for PerfBuffer<'b> {}
