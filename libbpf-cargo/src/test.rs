@@ -1160,7 +1160,6 @@ fn test_skeleton_builder_deterministic() {
     let skel1 = NamedTempFile::new().unwrap();
     SkeletonBuilder::new()
         .source(proj_dir.join("src/bpf/prog.bpf.c"))
-        .debug(true)
         .clang("clang")
         .build_and_generate(skel1.path())
         .unwrap();
@@ -1169,7 +1168,6 @@ fn test_skeleton_builder_deterministic() {
     let skel2 = NamedTempFile::new().unwrap();
     SkeletonBuilder::new()
         .source(proj_dir.join("src/bpf/prog.bpf.c"))
-        .debug(true)
         .clang("clang")
         .build_and_generate(skel2.path())
         .unwrap();
