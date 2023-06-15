@@ -264,7 +264,12 @@ impl Map {
 
         // Get the map fd
         let fd = unsafe { libbpf_sys::bpf_map__fd(ptr.as_ptr()) };
-        let fd = util::parse_ret_i32(fd)?;
+        let fd = match util::parse_ret_i32(fd) {
+            Ok(fd) => fd,
+            // fail only if the map is autocreate
+            Err(e) if unsafe { libbpf_sys::bpf_map__autocreate(ptr.as_ptr()) } => return Err(e),
+            Err(_) => fd,
+        };
 
         let ty = MapType::try_from(unsafe { libbpf_sys::bpf_map__type(ptr.as_ptr()) })
             .unwrap_or(MapType::Unknown);
