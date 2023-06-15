@@ -231,7 +231,7 @@ impl Map {
 
         // Get the map fd
         let fd = unsafe { libbpf_sys::bpf_map__fd(ptr.as_ptr()) };
-        if fd < 0 {
+        if fd < 0 && unsafe { libbpf_sys::bpf_map__autocreate(ptr.as_ptr()) } {
             return Err(Error::System(-fd));
         }
 
