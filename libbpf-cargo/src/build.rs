@@ -182,7 +182,8 @@ fn compile_one(debug: bool, source: &Path, out: &Path, clang: &Path, options: &s
         // system specific and temporary paths. That can render our generated
         // skeletons unstable, potentially rendering them unsuitable for inclusion
         // in version control systems. So strip this information.
-        strip_dwarf_info(out).with_context(|| format!("Failed to strip object file {}", out.display()))?;
+        strip_dwarf_info(out)
+            .with_context(|| format!("Failed to strip object file {}", out.display()))?;
     }
     Ok(())
 }
