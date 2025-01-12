@@ -785,6 +785,11 @@ impl Map {
     pub fn as_libbpf_bpf_map_ptr(&self) -> Option<NonNull<libbpf_sys::bpf_map>> {
         self.ptr
     }
+
+    /// Retrieve the max_entries for the map.
+    pub fn max_entries(&self) -> Option<u32> {
+        Some(unsafe { libbpf_sys::bpf_map__max_entries(self.ptr?.as_ptr()) })
+    }
 }
 
 impl From<Map> for OwnedFd {
