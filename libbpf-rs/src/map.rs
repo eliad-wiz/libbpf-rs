@@ -78,6 +78,11 @@ impl OpenMap {
         unsafe { libbpf_sys::bpf_map__max_entries(self.ptr.as_ptr()) }
     }
 
+    /// Retrieve map flags
+    pub fn map_flags(&self) -> u32 {
+        unsafe { libbpf_sys::bpf_map__map_flags(self.ptr.as_ptr()) }
+    }
+
     pub fn set_map_ifindex(&mut self, idx: u32) {
         unsafe { libbpf_sys::bpf_map__set_ifindex(self.ptr.as_ptr(), idx) };
     }
@@ -794,6 +799,11 @@ impl Map {
     /// Retrieve max_entries of the map.
     pub fn max_entries(&self) -> Option<u32> {
         Some(unsafe { libbpf_sys::bpf_map__max_entries(self.ptr?.as_ptr()) })
+    }
+
+    /// Retrieve map flags
+    pub fn map_flags(&self) -> Option<u32> {
+        Some(unsafe { libbpf_sys::bpf_map__map_flags(self.ptr?.as_ptr()) })
     }
 }
 
